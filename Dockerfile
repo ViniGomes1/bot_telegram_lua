@@ -1,23 +1,22 @@
-FROM openresty/openresty:noble
+FROM alpine:3.20
 
-RUN apt-get update && apt-get install -y \
-    curl unzip build-essential libssl-dev\
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache \
+    lua5.3 \
+    lua5.3-dev \
+    luarocks5.3 \
+    curl \
+    build-base \
+    openssl-dev
 
-# Usa o luarocks do próprio OpenResty (compatível com LuaJIT)
-RUN /usr/local/openresty/luajit/bin/luajit -e "print('LuaJIT OK')"
-
-RUN opm get ledgetech/lua-resty-http
-RUN opm get openresty/lua-resty-string
-
-RUN luarocks install luasec
-RUN luarocks install luasocket
-RUN luarocks install htmlparser
+RUN luarocks-5.3 install luasec
+RUN luarocks-5.3 install luasocket
+RUN luarocks-5.3 install lua-cjson
+RUN luarocks-5.3 install htmlparser
 
 WORKDIR /app
 COPY . .
 
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
+COPY start-server.sh /start-server.sh
+RUN chmod +x /start-server.sh
 
-CMD ["/start.sh"]
+CMD ["/start-server.sh"]
