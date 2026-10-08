@@ -1,6 +1,6 @@
 -- bot.lua
 local cjson = require("cjson")
-local http  = require("resty.http")  -- usa resty.http, não socket.http
+local http  = require("socket.http")  -- usa resty.http, não socket.http
 
 TelegramApiConfigure = {}
 TelegramApiConfigure.__index = TelegramApiConfigure
@@ -34,7 +34,7 @@ function TelegramApiConfigure:send_message(chat_id, text, opts)
     })
 
     if not res then
-        ngx.log(ngx.ERR, "Erro ao enviar mensagem: ", err)
+        io.stderr:write("Erro ao enviar mensagem: ", err)
     end
 end
 
@@ -58,7 +58,7 @@ function TelegramApiConfigure:send_photo(chat_id, photo, caption, opts)
     })
 
     if not res then
-        ngx.log(ngx.ERR, "Erro ao enviar mensagem: ", err)
+        io.stderr:write("Erro ao enviar mensagem: ", err)
     end
 end
 
