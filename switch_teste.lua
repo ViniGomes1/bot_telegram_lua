@@ -1,3 +1,4 @@
-local urlAz = "bea"
+local TelegramApiConfigure = require("TelegramApi.TelegramApiConfigure")
 
-print(urlAz == "bea" and "sal" or "vazio")
+local tg = TelegramApiConfigure:new()
+tg:send_message("8009230244", "Teste do bot!")
