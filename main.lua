@@ -1,4 +1,4 @@
-local api = require('telegram-bot-lua').configure('8009230244:AAHcHJL3L65eQDg22BnESWjrfl_7uvtdPXg')
+local api = require('telegram-bot-lua').configure(os.getenv("TELEGRAM_TOKEN"))
 
 function api.on_message(message)
     local cmd = api.extract_command(message)

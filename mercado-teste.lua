@@ -1,6 +1,6 @@
 local mercadoClass = require("ScappingClasses.MercadoLivreSrapinClass")
 
-local classeMercado = mercadoClass:new("https://meli.la/2Jby9Xh")
+local classeMercado = mercadoClass:new("https://meli.la/2xJ9ciu")
 local polyContent = classeMercado:polyContent()
 print(classeMercado:title())
 print(classeMercado:picture())
@@ -25,7 +25,7 @@ local function sendMercadoLivreTextProduct(url)
 
     if previousPrice == "" then
         outText = {
-        text = "<b>" .. title .. "</b>" .. 
+        text = "<b>" .. title .. "</b>" ..
         "\n\n" .. "POR APENAS: " .. currentPrice .. "\n"..
         (priceInstallments == "" and "" or priceInstallments) ..
         "\n\nACESSANDO PELO LINK: " .. url ..
@@ -34,16 +34,16 @@ local function sendMercadoLivreTextProduct(url)
     }
     else
         outText = {
-        text = "<b>" .. title .. "</b>" .. 
+        text = "<b>" .. title .. "</b>" ..
         "\n\n" .. "DE: " .. "<del>" .. previousPrice .. "</del>"  ..
         "\nPARA: " ..  "<b>" .. currentPrice .. "</b>"  ..
-        " " .. (discountPercentage == "" and "" or discountPercentage .. "\n") .. 
+        " " .. (discountPercentage == "" and "" or discountPercentage .. "\n") ..
         (priceInstallments == "" and "" or priceInstallments) ..
         "\n\nACESSANDO PELO LINK: " .. url ..
         "\n\n!!&#129421;Promoção sujeita a alteração, aproveite&#129421;!!",
         imageUrl = picture
     }
     end
-    
+
     return outText
 end
