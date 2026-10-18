@@ -20,7 +20,7 @@ local function sendMercadoLivreTextProduct(url)
 
     if previousPrice == "" then
         outText = {
-        text = "<b>" .. title .. "</b>" .. 
+        text = "<b>" .. title .. "</b>" ..
         "\n\n" .. "POR APENAS: " .. currentPrice .. "\n"..
         (priceInstallments == "" and "" or priceInstallments) ..
         "\n\nACESSANDO PELO LINK: " .. url ..
@@ -29,17 +29,17 @@ local function sendMercadoLivreTextProduct(url)
     }
     else
         outText = {
-        text = "<b>" .. title .. "</b>" .. 
+        text = "<b>" .. title .. "</b>" ..
         "\n\n" .. "DE: " .. "<del>" .. previousPrice .. "</del>"  ..
         "\nPARA: " ..  "<b>" .. currentPrice .. "</b>"  ..
-        " " .. (discountPercentage == "" and "" or discountPercentage .. "\n") .. 
+        " " .. (discountPercentage == "" and "" or discountPercentage .. "\n") ..
         (priceInstallments == "" and "" or priceInstallments) ..
         "\n\nACESSANDO PELO LINK: " .. url ..
         "\n\n!!&#129421;Promoção sujeita a alteração, aproveite&#129421;!!",
         imageUrl = picture
     }
     end
-    
+
     return outText
 end
 
@@ -58,9 +58,9 @@ local function sendAmazonTextProduct(url)
 
     if fromPrice == false then
         outText = {
-            text = "<b>" .. title .. "</b>" .. "\n" .. 
-            "\nPOR APENAS: " .. price .. 
-            "\n".. bestOfferText .. 
+            text = "<b>" .. title .. "</b>" .. "\n" ..
+            "\nPOR APENAS: " .. price ..
+            "\n".. bestOfferText ..
             "\nACESSANDO PELO LINK: " .. url..
             "\n!!&#129421;Promoção sujeita a alteração, aproveite&#129421;!!",
             imageUrl = urlImage
@@ -68,10 +68,10 @@ local function sendAmazonTextProduct(url)
     else
 
         outText = {
-            text = "<b>" .. title .. "</b>" .. 
+            text = "<b>" .. title .. "</b>" ..
             "\n\n" .. "DE: " .. "<del>" .. fromPrice .. "</del>" .. "\n"
-            .. "PARA: " .. "<b>" .. price .. "</b>"  .. 
-            "\n" .. bestOfferText .. 
+            .. "PARA: " .. "<b>" .. price .. "</b>"  ..
+            "\n" .. bestOfferText ..
             "\n\nACESSANDO PELO LINK: " .. url ..
             "\n\n!!&#129421;Promoção sujeita a alteração, aproveite&#129421;!!",
             imageUrl = urlImage
@@ -86,7 +86,7 @@ local function process_update(update)
         local chat_id = update.message.chat.id
         local text    = update.message.text or ""
         local cmd, arg = text:match("([^%s]+)%s+(.+)")
-        
+
         if cmd == "/amazon" then
             if string.match(arg, "https://amzn.to/") then
                 local amazon = sendAmazonTextProduct(arg)
@@ -101,7 +101,6 @@ local function process_update(update)
             else
                 botBotado:send_message(chat_id, "o link mercadolivre é incompatível, deve conter pelo menos https://meli.la/")
             end
-            botBotado:send_message(chat_id,"mercado livre está em desenvolvimento atualmente")
         elseif cmd == "/sair" then
             botBotado:send_message(chat_id, "saindo(eu não sai verdadeiramente) &#128123; &#128123;", {parse_mode = 'HTML'})
         else

@@ -13,6 +13,7 @@ RUN luarocks-5.3 install luasocket
 RUN luarocks-5.3 install lua-cjson
 RUN luarocks-5.3 install htmlparser
 
+
 WORKDIR /app
 COPY . .
 
